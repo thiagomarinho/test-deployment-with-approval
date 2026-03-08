@@ -1,0 +1,18 @@
+on:
+  workflow_dispatch:
+
+jobs:
+  dev:
+    name: run test in dev
+    environment: dev
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo 'hello dev'
+
+  prod:
+    needs: dev
+    name: run test in prod
+    environment: prod
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo 'hello prod'
