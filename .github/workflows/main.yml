@@ -17,7 +17,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo 'hello prod'
-      - run: |
+      - name: Check approver
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
           echo "who approved?"
           APPROVER=$(gh api /repos/${{ github.repository }}/actions/runs/${{ github.run_id }}/approvals --jq '.[0].user.login')
           echo "Approved for production by $APPROVER"
